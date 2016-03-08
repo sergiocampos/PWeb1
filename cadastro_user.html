@@ -9,11 +9,33 @@
 <body>
 	<?php 
 	try {
+		echo "string";
 		$con = new PDO("mysql:host=localhost;dbname=gravadora","root","tguide");
 
-		
+		#Cadastro de Cd
+		$titulo = $_POST['titulo'];
+		$dataLanc = $_POST['data_lancamento'];
+		$cantor = $_POST['cantor'];
+
+
+		#Cadastro de cantor
+		$nomeCantor = $_POST['nomeCantor'];
+		$count = $con->exec("insert into cantor (nome) values ('".$nomeCantor."')");
+		if (empty($count)) {
+			echo "Nenhum registro inserido!";
+		} else {
+			echo $count." registro inserido!";	
+		}
+
+
+		#Cadastro de Usuário
+		$login = $_POST['login'];
+		$nome_usuario = $_POST['nomeUser'];
+		$senha = $_POST['senha'];
+
+	$con = null;	
 	} catch (Exception $e) {
-		echo $e->getMessage();
+echo $e->getMessage();
 	}
 	?>
 	<form action="" method="POST">
@@ -27,7 +49,6 @@
 					foreach ($con->query($sql) as $key) {
 						print "<option value='".$key['codigo']."'>".$key['nome']."</option>";
 					}
-					$bd = null;
 				 ?>
 			</select><br>
 
