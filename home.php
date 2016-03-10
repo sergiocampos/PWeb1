@@ -9,6 +9,7 @@
 <body>
 	
 	<form action="">
+
 		<input type="submit" value="Login">
 	</form>
 	<form action="cadastro_user.php">
