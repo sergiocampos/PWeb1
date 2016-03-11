@@ -7,7 +7,6 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
-	esquece
 	<form action="">
 		<input type="submit" value="Login">
 	</form>
