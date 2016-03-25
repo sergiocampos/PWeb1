@@ -7,7 +7,30 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
-	
+	<?php 
+		try{
+			$bd = new PDO("mysql:host=localhost;dbname=gravadora","root","tguide");
+			echo "Conectado ao banco!"."<br><br>";
+			$nome = $_POST['titulo'];
+			$data = $_POST['data_lancamento'];
+
+			$dataQ = explode('-', $data);
+			$data_lancamento = $dataQ[2].'-'.$dataQ[1].'-'.$dataQ[0];
+			$cantor_fk = $_POST['cantor_fk'];
+			
+			$count = $bd->exec("insert into cd (titulo, data_lancamento,
+				cantor_fk) values ('$titulo','$data','$cantor_fk')");
+
+			echo $count;
+			echo "$data_lancamento[1]";
+			//$bd = null;
+			
+		} catch(PDOException $e){
+				echo $e->getMessage();	
+			}
+		//$bd = null;	
+	 ?>
+
 	<form action="">
 		<p>Cadastro de CD</p>
 		Título:<input type="text" name="titulo"><br>
@@ -16,13 +39,19 @@
 		<select name="cantor">
 			<?php 
 				$sql = "select * from cantor";
-					foreach ($con->query($sql) as $key) {
+					foreach ($bd->query($sql) as $key) {
 						print "<option value='".$key['codigo']."'>".$key['nome']."</option>";
 					}
+				//$bd = null;
 			 ?>
 		</select><br>
 
 		<input type="submit" value="Cadastrar">
 	</form>
+	<?php 
+		if ($bd==null) {
+			echo "Desconectado.";
+		}
+	 ?>
 </body>
 </html>
