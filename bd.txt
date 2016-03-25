@@ -1,0 +1,3 @@
+gravadora
+root
+tguide

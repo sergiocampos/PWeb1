@@ -16,30 +16,7 @@
 		echo $e->getMessage();
 	}
 	?>
-	<form action="" method="POST">
-		<p>Cadastro de CD</p>
-		Título:<input type="text" name="titulo"><br>
-		Data de Lançamento:<input type="text" name="data_lancamento"><br>
-		Cantor:
-		<select name="cantor">
-				<?php 
-					$sql = "select * from cantor";
-					foreach ($con->query($sql) as $key) {
-						print "<option value='".$key['codigo']."'>".$key['nome']."</option>";
-					}
-					$bd = null;
-				 ?>
-			</select><br>
-
-		<input type="submit" value="Cadastrar">
-		<hr>
-	</form>
-	<form action="" method="POST">
-		Cadastro de Cantor<br>
-		Nome:<input type="text" name="nomeCantor"><br>
-		<input type="submit" value="Cadastrar">
-	</form>
-	<hr>
+	
 	<form action="" method="POST">
 		Cadastro de Usuário <br>
 		Login:<input type="text" name="login"><br>
