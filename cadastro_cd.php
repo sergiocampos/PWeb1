@@ -16,10 +16,15 @@
 			
 			$dataQ = explode('-', $data);
 			$data_lancamento = $dataQ[2].'-'.$dataQ[1].'-'.$dataQ[0];
+			$capa = $_FILES['capa'];
+			$destino = 'imagemCD/' . $_FILES['capa']['name'];
+			$arquivo_tmp = $_FILES['capa']['tmp_name'];
+			move_uploaded_file($arquivo_tmp, $destino);
 			$cantor_fk = $_POST['cantor'];
 			
 			$count = $bd->exec("insert into cd (titulo, data_lancamento,
-				cantor_fk) values ('$nome','$data_lancamento','$cantor_fk')");
+				cantor_fk, capa) values ('$nome','$data_lancamento','$cantor_fk',
+				'$capa')");
 
 			echo $count;
 			//echo "$data_lancamento";
@@ -31,10 +36,11 @@
 		//$bd = null;	
 	 ?>
 
-	<form action="" method="POST">
+	<form enctype="multipart/form-data" action="" method="POST">
 		<p>Cadastro de CD</p>
 		Título:<input type="text" name="titulo"><br>
 		Data de Lançamento:<input type="date" name="data_lancamento"><br>
+		Capa:<input type="file" name="capa" size="50"><br>
 		Cantor:
 		<select name="cantor">
 			<?php 

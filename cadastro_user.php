@@ -14,14 +14,27 @@
 		$login = $_POST['login'];
 		$nome = $_POST['nomeUser'];
 		$senha = $_POST['senha'];
-		$count = $con->exec("insert into usuario (login, nome, senha) values 
-			('$login', '$nome', '$senha')");
-		echo "$count";
+		$senha_encrypt = md5($senha);
+		//echo "$senha_encrypt";
+		$sql = "select * from usuario";
+		foreach ($con->query($sql) as $key) {
+			if ($login === $key['login']) {			
+			//$login_encontrado = $key['login'];
+			echo "É igual";
+			} else {
+				$count = $con->exec("insert into usuario (login, nome, senha) values 
+					('$login', '$nome', '$senha_encrypt')");
+					echo "$count";
+			}
+
+		}
+
 		
+	$con = null;	
 	} catch (Exception $e) {
 		echo $e->getMessage();
 	}
-	$con = null;
+	//$con = null;
 	?>
 	
 	
