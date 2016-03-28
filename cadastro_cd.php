@@ -13,16 +13,16 @@
 			echo "Conectado ao banco!"."<br><br>";
 			$nome = $_POST['titulo'];
 			$data = $_POST['data_lancamento'];
-
+			
 			$dataQ = explode('-', $data);
 			$data_lancamento = $dataQ[2].'-'.$dataQ[1].'-'.$dataQ[0];
-			$cantor_fk = $_POST['cantor_fk'];
+			$cantor_fk = $_POST['cantor'];
 			
 			$count = $bd->exec("insert into cd (titulo, data_lancamento,
-				cantor_fk) values ('$titulo','$data','$cantor_fk')");
+				cantor_fk) values ('$nome','$data_lancamento','$cantor_fk')");
 
 			echo $count;
-			echo "$data_lancamento[1]";
+			//echo "$data_lancamento";
 			//$bd = null;
 			
 		} catch(PDOException $e){
@@ -31,10 +31,10 @@
 		//$bd = null;	
 	 ?>
 
-	<form action="">
+	<form action="" method="POST">
 		<p>Cadastro de CD</p>
 		Título:<input type="text" name="titulo"><br>
-		Data de Lançamento:<input type="text" name="data_lancamento"><br>
+		Data de Lançamento:<input type="date" name="data_lancamento"><br>
 		Cantor:
 		<select name="cantor">
 			<?php 
@@ -48,10 +48,5 @@
 
 		<input type="submit" value="Cadastrar">
 	</form>
-	<?php 
-		if ($bd==null) {
-			echo "Desconectado.";
-		}
-	 ?>
 </body>
 </html>
