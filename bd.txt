@@ -1,3 +1,4 @@
-gravadora
-root
-tguide
+host:localhost
+banco:gravadora
+login:root
+senha:

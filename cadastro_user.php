@@ -9,7 +9,7 @@
 <body>
 	<?php 
 	try {
-		$con = new PDO("mysql:host=localhost;dbname=gravadora","root","tguide");
+		$con = new PDO("mysql:host=localhost;dbname=gravadora","root");
 		echo "conectado!";
 		$login = $_POST['login'];
 		$nome = $_POST['nomeUser'];

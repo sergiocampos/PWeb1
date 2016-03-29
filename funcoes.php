@@ -60,7 +60,7 @@
 			}
 		}
 		return $array;
-	}-	
+	}	
 
 	function estaLogado(){
 		if(isset($_SESSION['dados_logado'])){
@@ -75,6 +75,38 @@
 			session_destroy();
 		}
 	}
+
+	function cadastrar_user($bd,$post){
+		$nome = $post['nome'];
+		$login = $post['login'];
+		$senha = md5($post['senha']);
+
+		if(VerificaUserJaExiste($bd, $login)){
+			return false;
+		}
+
+		$bd->exec("insert into usuario(codigo, login, nome, senha) values (null, '$login', '$nome', '$senha');");
+		return true;
+	}
+
+	function VerificaUserJaExiste($bd, $login){
+		$sql = "select * from usuario where login = '$login';";
+		if($bd->query($sql)->fetch(PDO::FETCH_NUM)[0] != 0){
+			return true;
+		}
+		return false;
+	}
+	function autenticar($bd, $post){
+		$login = $post['login'];
+		$senha = md5($post['senha']);
+		$sql = "select * from usuario where login = '$login' and senha = '$senha';";
+		$query =  $bd->query($sql)->fetch(PDO::FETCH_ASSOC);
+		if($query){
+			$_SESSION['dados_logado'] = $query;
+			return true;
+		}
+		return false;
+	}		
 
 
 
