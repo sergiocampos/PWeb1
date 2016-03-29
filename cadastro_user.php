@@ -9,15 +9,26 @@
 <body>
 	<?php 
 	try {
-		$con = new PDO("mysql:host=localhost;dbname=gravadora","root","");
+		$con = new PDO("mysql:host=localhost;dbname=gravadora","root","tguide");
 		echo "conectado!";
 		$login = $_POST['login'];
 		$nome = $_POST['nomeUser'];
 		$senha = $_POST['senha'];
 		$senha_encrypt = md5($senha);
-		$count = $con->exec("insert into usuario (login, nome, senha) values 
-				('$login', '$nome', '$senha_encrypt')");
+		//header("Location:validaLogin.php");
+		foreach ($con->query("select * from usuario where login ='$login'") as $user) {
+		if ($user['login'] == $login) {	
+			echo "usuário já cadastrado";
+			//exit();
+		} else{
+			
+			$count = $con->exec("insert into usuario (login, nome, senha) 
+				values	('$login', '$nome', '$senha_encrypt')");
 				echo "$count";
+			}
+		}
+
+		
 					
 	$con = null;	
 	} catch (Exception $e) {
