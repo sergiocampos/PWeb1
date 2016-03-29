@@ -34,7 +34,7 @@
 					<?php else: ?>
 					
 						<h3>Olá, visitante!</h3>
-						<h4>Faça <a href="entrar.php">login</a> ou <a href="">cadastre-se!</a></h4>
+						<h4>Faça <a href="entrar.php">login</a> ou <a href="cadastrarusuario.php">cadastre-se!</a></h4>
 					
 					<?php endif; ?>
 					
@@ -70,7 +70,7 @@
 
 				<?php else: ?>
 					
-					<h4>Para ver a listagem de Cds é necessário fazer <a href="entrar.php">login</a> ou se <a href="">cadastrar!</a></h4>
+					<h4>Para ver a listagem de Cds é necessário fazer <a href="entrar.php">login</a> ou se <a href="cadastrarusuario.php">cadastrar!</a></h4>
 				
 				<?php endif; ?>
 				
