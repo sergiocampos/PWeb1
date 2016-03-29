@@ -2,29 +2,39 @@
 	include_once('funcoes.php');
 	$msg = "";
 
-	if(isset($_POST['nome'])){
-		$nome = $_POST['nome'];
-		$login = $_POST['login'];
-		$senha = $_POST['senha'];
-		
-		if($nome != "" && $login != "" && $senha != ""){
-			if(!adicionarUsuario($bd, $_POST)){
-				$msg = "Este usuário já existe em nosso sistema!";
-			}else{
-				header("Location:cadastro_user.php?info=cadastrado", "refresh");
-			}
-		}else{
-			$msg = "Erro: O servidor não recebeu o formulario completo!";
-		}
+	if(!estaLogado()){
+		header("Location:home.php", "refresh");
 	}
+
+	if(isset($_GET['codigo'])){
+		$id = $_GET['codigo'];
+		$cd = getCDs($bd, $id);
+		if(count($cd) == 0){
+			header("Location:erro.php?erro=1", "refresh");
+		}
+		$cd = $cd->fetch();
+
+	}
+
+	
+
+	if(isset($_POST['removeid'])){
+		if(removercd($bd, $_POST['removeid'])){
+			header("Location:removercd.php?info=alterado", "refresh");
+		}else{
+			$msg = "Erro: CD não encontrado.";
+		}
+
+	}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Projeto Pweb I - Gravadora</title>
+	<meta charset="UTF-8">
+	<title>Gravadora WEB</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="js/jquery.js"></script>
@@ -72,20 +82,21 @@
 				</div>
 			</div>
 			<div id="direita_col">
-				<h2>Cadastrar</h2>
-				
-				<?php if($msg != ""):?> <p class="erro"><?php echo $msg; ?></p> <?php endif; ?>
-				<?php if(isset($_GET['info'])):?> <p class="sucesso">Usuário cadastrado!</p> <?php endif; ?>
-				
-				<form action="cadastro_user.php" method="post">
-						<label for="login">Nome:</label>
-						<input type="text" name="nome" id="nome" required>
-						<label for="login">Login:</label>
-						<input type="text" name="login" id="login" required>
-						<label for="senha">Senha</label>
-						<input type="password" name="senha" id="senha" required><br>
-						<input type="submit" value="Cadastrar">
-				</form>
+				<?php if($msg != ""):?> 
+					<p class="erro"><?php echo $msg; ?></p> 
+				<?php elseif(isset($_GET['info'])): ?>
+					<p class="sucesso">CD removido com sucesso!</p>
+					<a href="home.php">Voltar</a>
+				<?php else: ?>
+					<h2>Deseja remover '<?php echo $cd['titulo']; ?>'?</h2>
+					<div style="width: 400px; margin-left: 110px; margin-top: 45px; text-align: center;">
+						<img src="img/capas/<?php echo $cd['codigo_cd'] ?>.jpg" alt=""><br><br>
+						<form id="removecd" action="removercd.php" method="post">
+							<input type="hidden" name="removeid" value="<?php echo $cd['codigo_cd']; ?>">
+							<input id="removecdbtn" type="submit" class="btn btn-primary" value="Remover">
+						</form>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

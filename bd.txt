@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 host:localhost
 banco:gravadora
 login:root
 senha:
-=======
-host:localhost
-banco:gravadora
-login:root
-senha:
->>>>>>> 8ebdd31bf73617190c7946be37a3d479e99dca9a

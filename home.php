@@ -1,5 +1,6 @@
 <?php 
 	include_once('funcoes.php');
+	$cds = getCDs($bd);
 
 ?>
 
@@ -33,21 +34,20 @@
 					
 					<?php else: ?>
 					
-						<h3>Olá, visitante!</h3>
-						<h4>Faça <a href="entrar.php">login</a> ou <a href="cadastrarusuario.php">cadastre-se!</a></h4>
-					
+						<h3>Olá!</h3>
+				
 					<?php endif; ?>
 					
 				</div>
 				<div id="menu">
 					<h4>Menu</h4>
 					<ul>
-						<li><a href="index.php">Início</a></li>
+						<li><a href="home.php">Início</a></li>
 						<li>Cadastrar
 							<ul>
-								<li><a href="cadastrar_cd.php">CD</a></li>
-								<li><a href="cadastrar_cantor.php">Cantor</a></li>
-								<li><a href="cadastrar_user.php">Usuário</a></li>
+								<li><a href="cadastro_cd.php">CD</a></li>
+								<li><a href="cadastro_cantor.php">Cantor</a></li>
+								<li><a href="cadastro_user.php">Usuário</a></li>
 							</ul>
 						</li>
 						<li><a href="download.php">Backup CDs</a></li>
@@ -63,14 +63,13 @@
 					<select name="filtro_select" id="filtro_select">
 						<option value="album">Álbum</option>
 						<option value="cantor">Cantor</option>
-						<option value="lancamento">Data de lançamento</option>
 					</select>
 					<div id="listagemcd">
 					</div>
 
 				<?php else: ?>
 					
-					<h4>Para ver a listagem de Cds é necessário fazer <a href="entrar.php">login</a> ou se <a href="cadastrarusuario.php">cadastrar!</a></h4>
+					<h4>Faça <a href="entrar.php">login</a> ou <a href="cadastro_user.php">cadastre-se!</a></h4>
 				
 				<?php endif; ?>
 				
