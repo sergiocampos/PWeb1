@@ -70,7 +70,7 @@
 								<li><a href="cadastro_user.php">Usuário</a></li>
 							</ul>
 						</li>
-						<li><a href="download.php">Backup CDs</a></li>
+						<li><a href="xml_cd.php">Backup CDs</a></li>
 					</ul>
 				</div>
 			</div>
