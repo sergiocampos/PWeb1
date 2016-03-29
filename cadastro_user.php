@@ -22,19 +22,13 @@
 		$login = $_POST['login'];
 		$nome = $_POST['nomeUser'];
 		$senha = $_POST['senha'];
-		$senha_encrypt = md5($senha);
-		//header("Location:validaLogin.php");
-		foreach ($con->query("select * from usuario where login ='$login'") as $user) {
-		if ($user['login'] == $login) {	
-			echo "usuário já cadastrado";
-			//exit();
-		} else{
-			
-			$count = $con->exec("insert into usuario (login, nome, senha) 
+		$senha_encrypt = md5($senha);			
+		
+		$count = $con->exec("insert into usuario (login, nome, senha) 
 				values	('$login', '$nome', '$senha_encrypt')");
 				echo "$count";
-			}
-		}
+			
+		
 
 		
 					
